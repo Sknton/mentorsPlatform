@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Information</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/css/accountInfo.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2>Account Information</h2>
+          <form id="accountInfoForm">
+            <label for="username">Username:</label>
+            <h5 class="card-title" id="username"></h5>
+
+            <label for="email">Email:</label>
+            <span id="emailError" class="error-message"></span>
+            <input type="email" id="email" name="email" />
+
+            <label for="prevPassword">Previous Password:</label>
+            <span id="prevPasswordError" class="error-message"></span>
+            <input
+              type="password"
+              id="prevPassword"
+              name="prevPassword"
+              placeholder="Enter previous password"
+            />
+
+            <label for="password">New Password:</label>
+            <span id="passwordError" class="error-message"></span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter new password"
+            />
+
+            <div id="popup"></div>
+            <input type="submit" value="Update" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="/scripts/accountInfo.js"></script>
+    <script src="/scripts/header.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

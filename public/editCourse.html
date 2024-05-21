@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MentorMatch</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/css/createCourse.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <div class="container container-big">
+      <h1>Edit a Course</h1>
+      <form id="createCourseForm">
+        <div class="form-group">
+          <label for="courseImage">Course Image</label>
+          <img
+            id="courseImage"
+            src=""
+            class="card-img-top"
+            alt="Course Image"
+          />
+        </div>
+        <div class="form-group">
+          <label for="courseName">Course Name</label>
+          <input
+            type="text"
+            id="courseName"
+            class="form-control"
+            name="courseName"
+            required
+            minlength="5"
+            maxlength="100"
+          />
+        </div>
+        <div class="form-group">
+          <label for="authorName">Author Name</label>
+          <input
+            type="text"
+            id="authorName"
+            class="form-control"
+            name="authorName"
+            required
+            minlength="5"
+            maxlength="60"
+          />
+        </div>
+        <div class="form-group">
+          <label for="courseDescription">Course Description</label>
+          <textarea
+            id="courseDescription"
+            class="form-control"
+            rows="3"
+            name="courseDescription"
+            required
+            minlength="20"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="imgUrl">Image URL</label>
+          <input type="file" id="imgUrl" class="form-control" name="imgUrl" />
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input
+            type="text"
+            id="category"
+            class="form-control"
+            name="category"
+            required
+            minlength="5"
+            maxlength="50"
+          />
+        </div>
+        <div class="form-group">
+          <label for="courseHashtags">Hashtags</label>
+          <input
+            type="text"
+            id="courseHashtags"
+            class="form-control"
+            placeholder="Enter hashtags separated by spaces"
+            name="courseHashtags"
+            required
+            minlength="15"
+            maxlength="255"
+          />
+        </div>
+        <div class="form-group">
+          <label for="yearsOfExperience">Years of Experience</label>
+          <input
+            type="number"
+            id="yearsOfExperience"
+            class="form-control"
+            name="yearsOfExperience"
+            required
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label for="experience">Experience</label>
+          <textarea
+            id="experience"
+            class="form-control"
+            rows="3"
+            name="experience"
+            required
+            minlength="15"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="linkedIn">LinkedIn</label>
+          <input
+            type="text"
+            id="linkedIn"
+            class="form-control"
+            name="linkedIn"
+            minlength="10"
+            maxlength="255"
+          />
+        </div>
+        <div class="form-group">
+          <label for="github">GitHub</label>
+          <input
+            type="text"
+            id="github"
+            class="form-control"
+            name="github"
+            minlength="10"
+            maxlength="255"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Create Course</button>
+      </form>
+    </div>
+    <script src="/scripts/editCourse.js"></script>
+    <script src="/scripts/header.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
