@@ -35,18 +35,15 @@ window.onload = function () {
     })
     .catch((error) => console.error("Error:", error));
 
-  // Add event listener to each star
   const stars = Array.from(
     document.querySelectorAll("#rating .star")
   ).reverse();
   stars.forEach((star, index) => {
     star.addEventListener("click", function (event) {
-      // Remove the 'selected' class from all stars
       stars.forEach((star) => {
         star.classList.remove("selected");
       });
 
-      // Add the 'selected' class to the clicked star and all subsequent stars
       for (let i = 0; i <= index; i++) {
         stars[i].classList.add("selected");
       }
@@ -61,7 +58,6 @@ window.onload = function () {
       const rating = document.querySelectorAll("#rating .selected").length;
       const review = document.getElementById("reviewText").value;
 
-      // Send the rating and review to the server
       fetch("/mentors/api/reviews", {
         method: "POST",
         headers: {
@@ -75,9 +71,7 @@ window.onload = function () {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Handle the response from the server
           if (data.success) {
-            // Clear the form
             const selectedStars =
               document.querySelectorAll("#rating .selected");
             selectedStars.forEach((star) => {
@@ -85,7 +79,6 @@ window.onload = function () {
             });
             document.getElementById("reviewText").value = "";
 
-            // Add the new review to the page
             const reviewsContainer = document.getElementById("reviews");
             const reviewElement = document.createElement("div");
             reviewElement.classList.add("card", "mt-3");
@@ -98,7 +91,6 @@ window.onload = function () {
             reviewElement.appendChild(reviewBody);
             reviewsContainer.appendChild(reviewElement);
           } else {
-            // Handle errors
             console.error(data.error);
           }
         })

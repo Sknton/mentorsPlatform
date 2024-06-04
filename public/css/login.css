@@ -77,6 +77,6 @@ button:hover {
 
 .error-message {
   color: red;
-  display: none; /* Hidden by default */
+  display: none;
   font-size: small;
 }

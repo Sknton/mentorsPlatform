@@ -9,7 +9,6 @@ document
     const password = document.querySelector("#password");
     const email = document.querySelector("#email");
 
-    // Check if fields are empty
     if (!username.value.trim()) {
       showError(username, "Username is required");
       return;
@@ -42,12 +41,10 @@ document
     if (!response.ok) {
       showError(username, responseData.message);
     } else {
-      // Show the pop-up window with the success message
       const popup = document.querySelector("#popup");
       popup.textContent = responseData.success;
       popup.style.display = "block";
 
-      // Hide the pop-up window after 3 seconds
       setTimeout(() => {
         popup.style.display = "none";
       }, 3000);

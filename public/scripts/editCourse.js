@@ -7,7 +7,7 @@ generateUniqueFilename = function (originalFilename) {
     throw new Error("Invalid filename");
   }
   const timestamp = Date.now();
-  const random = Math.floor(Math.random() * 1000); // random number between 0 and 999
+  const random = Math.floor(Math.random() * 1000);
   return `${timestamp}-${random}.${extension}`;
 };
 
@@ -46,7 +46,6 @@ document
       ? generateUniqueFilename(imageFile.name)
       : null;
 
-    // Only set the imgUrl field if a new image file was provided
     if (imageFile) {
       formData.set("imgUrl", imageFile, uniqueFilename);
     }

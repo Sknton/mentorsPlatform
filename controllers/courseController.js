@@ -1,4 +1,3 @@
-// controllers/courseController.js
 const session = require("express-session");
 const db = require("../database");
 const path = require("path");
@@ -58,8 +57,6 @@ exports.getCreateCoursePage = (req, res) => {
 exports.createCourse = (req, res) => {
   const course = req.body;
 
-  // Create the course in the database
-  // This is just a placeholder, replace it with your actual logic for creating a course in the database
   db.createCourse(course)
     .then((newCourse) => {
       res.json(newCourse);
@@ -97,10 +94,10 @@ exports.createCourse = async (req, res) => {
     }
 
     const imageFile = req.file;
-    const filename = imageFile.filename; // Get the filename from the image file
+    const filename = imageFile.filename;
 
     const course = {
-      user_id: req.session.userId, // assuming you have user information in req.user
+      user_id: req.session.userId,
       course_name: courseName,
       img_url: `${filename}`,
       course_description: courseDescription,
@@ -164,7 +161,6 @@ exports.getUsersCourses = (req, res) => {
   try {
     const userId = req.session.userId;
 
-    // Query the database to find the courses of the user and their reviews
     const sql = `
       SELECT courses.*, AVG(course_reviews.rating) as average_rating, COUNT(course_reviews.rating) as review_count
       FROM courses
@@ -194,7 +190,7 @@ exports.getUsersCourses = (req, res) => {
 
 exports.deleteCourse = (req, res) => {
   const courseId = req.params.courseId;
-  // Query the database to get the course details
+
   const sqlGet = "SELECT * FROM courses WHERE id = ?";
   db.query(sqlGet, [courseId], (err, result) => {
     if (err) {
@@ -203,7 +199,6 @@ exports.deleteCourse = (req, res) => {
       return;
     }
 
-    // If no course was found, send an error
     if (result.length === 0) {
       res
         .status(404)
@@ -219,7 +214,6 @@ exports.deleteCourse = (req, res) => {
       course.img_url
     );
 
-    // Delete the image file
     fs.unlink(imagePath, (err) => {
       if (err) {
         console.error(err.message);
@@ -230,7 +224,6 @@ exports.deleteCourse = (req, res) => {
         return;
       }
 
-      // Query the database to delete the course reviews
       const sqlDeleteReviews = "DELETE FROM course_reviews WHERE course_id = ?";
       db.query(sqlDeleteReviews, [courseId], (err, result) => {
         if (err) {
@@ -239,7 +232,6 @@ exports.deleteCourse = (req, res) => {
           return;
         }
 
-        // Query the database to delete the course
         const sqlDeleteCourse = "DELETE FROM courses WHERE id = ?";
         db.query(sqlDeleteCourse, [courseId], (err, result) => {
           if (err) {
@@ -259,9 +251,8 @@ exports.deleteCourse = (req, res) => {
 
 exports.getEditCoursePage = (req, res) => {
   const courseId = req.params.courseId;
-  const userId = req.session.userId; // or decode the user ID from the JWT
+  const userId = req.session.userId;
 
-  // Query the database to get the course details
   const sql = "SELECT * FROM courses WHERE id = ?";
   db.query(sql, [courseId], (err, result) => {
     if (err) {
@@ -270,7 +261,6 @@ exports.getEditCoursePage = (req, res) => {
       return;
     }
 
-    // If no course was found, send an error
     if (result.length === 0) {
       res
         .status(404)
@@ -280,7 +270,6 @@ exports.getEditCoursePage = (req, res) => {
 
     const course = result[0];
 
-    // Check if the course belongs to the user
     if (course.user_id !== userId) {
       res.status(403).json({
         success: false,
@@ -339,10 +328,8 @@ exports.updateCourse = async (req, res) => {
       };
 
       if (filename) {
-        // A new image file was provided, update the image
         course.img_url = `${filename}`;
 
-        // Delete the old image file
         const oldImagePath = path.join(
           __dirname,
           "../public/images",
@@ -351,11 +338,9 @@ exports.updateCourse = async (req, res) => {
         fs.unlink(oldImagePath, (err) => {
           if (err) {
             console.error(err.message);
-            res
-              .status(500)
-              .json({
-                message: "An error occurred while deleting the old image",
-              });
+            res.status(500).json({
+              message: "An error occurred while deleting the old image",
+            });
             return;
           }
         });

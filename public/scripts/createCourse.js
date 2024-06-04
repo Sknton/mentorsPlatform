@@ -5,7 +5,7 @@ generateUniqueFilename = function (originalFilename) {
     throw new Error("Invalid filename");
   }
   const timestamp = Date.now();
-  const random = Math.floor(Math.random() * 1000); // random number between 0 and 999
+  const random = Math.floor(Math.random() * 1000);
   return `${timestamp}-${random}.${extension}`;
 };
 
@@ -22,7 +22,6 @@ document
     }
     const uniqueFilename = generateUniqueFilename(imageFile.name);
 
-    // Set the imgUrl field to the file, not the filename
     formData.set("imgUrl", imageFile, uniqueFilename);
 
     const response = await fetch("/mentors/create-course", {

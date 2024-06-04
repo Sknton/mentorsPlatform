@@ -1,4 +1,3 @@
-// controllers/userController.js
 const db = require("../database");
 const bcrypt = require("bcryptjs");
 const path = require("path");
@@ -10,7 +9,6 @@ exports.login = (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Query the database to find the user
     const sql = "SELECT * FROM users WHERE username = ?";
     db.query(sql, [username], async (err, result) => {
       if (err) {
@@ -19,7 +17,6 @@ exports.login = (req, res) => {
         return;
       }
 
-      // If user not found or password doesn't match, send an error
       if (
         result.length === 0 ||
         !(await bcrypt.compare(password, result[0].password))
@@ -50,12 +47,10 @@ exports.signUp = async (req, res) => {
     const sql = "INSERT INTO users SET ?";
     db.query(sql, user, (err, result) => {
       if (err) {
-        console.error(err.message); // Log the error message
+        console.error(err.message);
         if (err.code === "ER_DUP_ENTRY") {
-          // Send a JSON response with the error message
           res.status(409).json({ message: "Username or email already exists" });
         } else {
-          // Send a JSON response with a generic error message
           res.status(500).json({ message: "An error occurred" });
         }
         return;
@@ -71,8 +66,7 @@ exports.getAccountInformation = (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "accountInfo.html"));
 };
 exports.getUser = (req, res) => {
-  // Get the username from the session or token
-  const userId = req.session.userId; // or req.user.username, depending on your setup
+  const userId = req.session.userId;
 
   const sql = "SELECT * FROM users WHERE id = ?";
   db.query(sql, [userId], (err, result) => {
@@ -129,10 +123,8 @@ exports.updateUser = (req, res) => {
 
 exports.isLoggedIn = (req, res) => {
   if (req.session && req.session.userId) {
-    // User is logged in
     res.json({ isLoggedIn: true });
   } else {
-    // User is not logged in
     res.json({ isLoggedIn: false });
   }
 };
@@ -141,15 +133,12 @@ exports.logout = (req, res) => {
   if (req.session) {
     req.session.destroy((err) => {
       if (err) {
-        // Failed to destroy the session
         res.status(500).send("An error occurred");
       } else {
-        // Successfully destroyed the session
         res.send("Logged out successfully");
       }
     });
   } else {
-    // No session to destroy
     res.status(400).send("Not logged in");
   }
 };

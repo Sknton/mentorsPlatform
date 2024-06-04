@@ -1,14 +1,11 @@
-// Fetch and display courses based on the search term
 function fetchAndDisplayCourses(searchTerm) {
   fetch("/mentors/courses")
     .then((response) => response.json())
     .then((courses) => {
       let filteredCourses;
       if (searchTerm.trim() === "") {
-        // If the search term is empty, show all courses
         filteredCourses = courses;
       } else {
-        // Otherwise, filter the courses based on the search term
         filteredCourses = courses.filter((course) => {
           return course.hashtags
             .toLowerCase()
@@ -16,20 +13,16 @@ function fetchAndDisplayCourses(searchTerm) {
         });
       }
 
-      // Clear the mentor list before displaying the filtered courses
       const mentorList = document.getElementById("mentorList");
       mentorList.innerHTML = "";
 
-      // Display the filtered courses
       displayCourses(filteredCourses, mentorList);
     })
     .catch((error) => console.error("Error:", error));
 }
 
-// Fetch and display courses when the page loads
 fetchAndDisplayCourses("");
 
-// Fetch and display courses when the search term changes
 document.getElementById("searchTerm").addEventListener("input", function (e) {
   const searchTerm = e.target.value;
   fetchAndDisplayCourses(searchTerm);
@@ -38,7 +31,7 @@ document.getElementById("searchTerm").addEventListener("input", function (e) {
 function displayCourses(courses, mentorList) {
   courses.forEach((course) => {
     const col = document.createElement("div");
-    col.className = "col-md-4 mb-4"; // Change 'md' and '4' to adjust the number of cards per row
+    col.className = "col-md-4 mb-4";
     mentorList.appendChild(col);
 
     const card = document.createElement("div");

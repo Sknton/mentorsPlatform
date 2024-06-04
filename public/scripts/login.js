@@ -8,11 +8,9 @@ document
     const username = document.querySelector("#loginUsername");
     const password = document.querySelector("#loginPassword");
 
-    // Clear previous error messages
     document.querySelector("#usernameError").style.display = "none";
     document.querySelector("#passwordError").style.display = "none";
 
-    // Check if fields are empty
     if (!username.value.trim()) {
       document.querySelector("#usernameError").textContent =
         "Username is required";
